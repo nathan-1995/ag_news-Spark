@@ -1,0 +1,14 @@
+#local environment file
+name: news_processing
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - pyspark
+  - pandas
+  - numpy
+  - requests
+  - pip:
+      - datasets

@@ -1,0 +1,72 @@
+# Install Miniconda in WSL
+
+# Download Miniconda by running these commands
+
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+
+bash Miniconda3-latest-Linux-x86_64.sh
+
+exit
+wsl
+
+source ~/.bashrc
+conda init bash
+source ~/.bashrc
+
+conda --version
+
+# Create and Activate the Conda Environment by running these commands
+
+conda env create -f /mnt/c/Users/yourpath/environment.yml #Example conda env create -f /mnt/c/Users/ndeli/Desktop/Work/uzabase/environment.yml
+
+conda activate news_processing
+
+python --version
+
+# Install Java in WSL by running these commands
+
+sudo apt install openjdk-21-jdk -y
+
+echo 'export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64' >> ~/.bashrc
+echo 'export PATH="$JAVA_HOME/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+
+echo $JAVA_HOME
+
+# Install Hadoop in WSL by running these commands
+
+wget https://downloads.apache.org/hadoop/common/hadoop-3.3.6/hadoop-3.3.6.tar.gz
+
+tar -xvzf hadoop-3.3.6.tar.gz
+mv hadoop-3.3.6 hadoop
+
+rm hadoop-3.3.6.tar.gz # Remove downloaded tar file
+
+echo 'export HADOOP_HOME=~/hadoop' >> ~/.bashrc
+echo 'export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop' >> ~/.bashrc
+echo 'export LD_LIBRARY_PATH=$HADOOP_HOME/lib/native:$LD_LIBRARY_PATH' >> ~/.bashrc
+echo 'export PATH=$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$PATH' >> ~/.bashrc
+source ~/.bashrc
+
+exit
+wsl
+
+hadoop version
+
+ls $HADOOP_HOME/lib/native/
+
+
+# Execute run.sh inside wsl 
+
+cd /mnt/c/Users/to your dir # Example: cd /mnt/c/Users/ndeli/Desktop/Work/uzabase/code/script
+
+chmod +x run.sh # Only need to this once
+
+bash run.sh # Executes script
+
+
+# Activating miniconda on WSL
+source ~/miniconda3/etc/profile.d/conda.sh
+conda activate news_processing
+cd /mnt/c/Users/..../code #cd /mnt/c/Users/ndeli/Desktop/Work/uzabase/code
+python src/run.py process_data_all --cfg config/config.yaml --dataset news --dirout "ztmp/data/"
