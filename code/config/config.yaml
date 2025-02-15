@@ -15,5 +15,3 @@ spark_settings: # Spark settings
   cores: 4
   driver_memory: "4g"
   executor_memory: "4g"
-
-debug_mode: false # If true, enables additional debugging logs
